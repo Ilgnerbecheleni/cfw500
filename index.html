@@ -97,9 +97,10 @@ const infoDiv = document.getElementById("info");
 let currentIndex = 0;
 
 function exibirParametro(index) {
+    const parametro = parametrosJson[index];
+    const infoDiv = document.getElementById("infoDiv");
     infoDiv.innerHTML = "";
 
-    const parametro = parametrosJson[index];
     const parametroDiv = document.createElement("div");
     parametroDiv.classList.add("parametro");
 
@@ -112,7 +113,8 @@ function exibirParametro(index) {
 
         parametro["Faixa de Valores"].forEach(opcao => {
             const option = document.createElement("option");
-            option.value = opcao.split(" = ")[0];
+            const opcaoSplit = opcao.split(" = ");
+            option.value = opcaoSplit[0];
             option.textContent = opcao;
             select.appendChild(option);
         });
