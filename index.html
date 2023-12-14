@@ -65,7 +65,27 @@ font-family: 'digital';
 font-size:62px;
 letter-spacing:3px;
 }
+.select-style {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: inline-block;
+    overflow: hidden;
+}
 
+/* Estilo para a seta do combobox */
+.select-style select {
+    padding: 8px 12px;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    appearance: none;
+}
+
+/* Estilo para as opções do combobox */
+.select-style select option {
+    padding: 10px;
+}
 
 </style>
 </head>
@@ -105,19 +125,20 @@ function exibirParametro(index) {
     titulo.textContent = `${parametro["Parâm."]} - ${parametro["Descrição"]}`;
     parametroDiv.appendChild(titulo);
 
-    if (Array.isArray(parametro["Faixa de Valores"])) {
-        const select = document.createElement("select");
+   if (Array.isArray(parametro["Faixa de Valores"])) {
+    const select = document.createElement("select");
+    select.classList.add("select-style"); // Adicione a classe para o combobox
 
-        parametro["Faixa de Valores"].forEach(opcao => {
-            const option = document.createElement("option");
-            const opcaoSplit = opcao.split(" = ");
-            option.value = opcaoSplit[0];
-            option.textContent = opcao;
-            select.appendChild(option);
-        });
+    parametro["Faixa de Valores"].forEach(opcao => {
+        const option = document.createElement("option");
+        const opcaoSplit = opcao.split(" = ");
+        option.value = opcaoSplit[0];
+        option.textContent = opcao;
+        select.appendChild(option);
+    });
 
-        parametroDiv.appendChild(select);
-    } else {
+    parametroDiv.appendChild(select);
+} else {
         const faixaValores = document.createElement("p");
         faixaValores.textContent = `Faixa de Valores: ${parametro["Faixa de Valores"]}`;
         parametroDiv.appendChild(faixaValores);
