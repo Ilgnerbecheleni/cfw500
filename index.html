@@ -18,6 +18,11 @@ body{
 display:flex;
 justify-content:center;
 align-items:center;
+	  margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .inversor{
@@ -86,6 +91,13 @@ letter-spacing:3px;
 .select-style select option {
     padding: 10px;
 }
+.footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto; /* Isso faz com que o footer fique colado ao fundo da página */
+}
+	
 
 </style>
 </head>
@@ -99,7 +111,9 @@ letter-spacing:3px;
 <button class='btn cima' id='cima'><img src="cima.png" alt="Minha Figura"></button>
 <button class='btn baixo' id='baixo'><img src="baixo.png" alt="Minha Figura"></button>
 </div>
-
+    <footer class="footer">
+        <p>Desenvolvido por Ilgner Aparecido Becheleni</p>
+    </footer>
 <script src='parametros.js'> </script>
   <script>
 	console.log(parametrosJson);
