@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFW 500</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+
+@font-face {
+   font-family: 'digital';
+   src: url('./7 Segment.ttf');
+}
+
+body{
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.inversor{
+position:relative;
+
+}
+
+.btn{
+background:none;
+border:0.5px solid #eee;
+border-radius:100%;
+cursor:pointer;
+position:absolute;
+}
+
+.reverse{
+left:20px;
+bottom:68px;
+}
+
+.cima{
+left:90px;
+bottom:120px;
+}
+
+.baixo{
+left:90px;
+bottom:75px;
+}
+
+#info{
+position:absolute;
+width:225px;
+height:135px;
+background:#4becc7;
+top:40px;
+left:29px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+#info h1{
+font-family: 'digital';
+font-size:62px;
+letter-spacing:3px;
+}
+
+
+</style>
+</head>
+<body>
+<div class='inversor'>
+<img src="HMI.png" alt="Minha Figura">
+<div id="info">
+<h1>P00</h1>
+</div>
+<button class='btn reverse'><img src="reverse.png" alt="Minha Figura"></button>
+<button class='btn '><img src="reverse.png" alt="Minha Figura"></button>
+<button class='btn '><img src="jog.png" alt="Minha Figura"></button>
+<button class='btn cima' id='cima'><img src="cima.png" alt="Minha Figura"></button>
+<button class='btn baixo' id='baixo'><img src="baixo.png" alt="Minha Figura"></button>
+</div>
+
+<script src='parametros.js'> </script>
+  <script>
+	console.log(parametrosJson);
+
+
+
+	const cima = document.getElementById('cima');
+	const baixo = document.getElementById('baixo');
+	console.log(cima);
+
+	
+const infoDiv = document.getElementById("info");
+let currentIndex = 0;
+
+function exibirParametro(index) {
+    infoDiv.innerHTML = "";
+
+    const parametro = parametrosJson[index];
+    const parametroDiv = document.createElement("div");
+    parametroDiv.classList.add("parametro");
+
+    const titulo = document.createElement("h3");
+    titulo.textContent = `${parametro["Parâm."]} - ${parametro["Descrição"]}`;
+    parametroDiv.appendChild(titulo);
+
+    if (Array.isArray(parametro["Faixa de Valores"])) {
+        const select = document.createElement("select");
+
+        parametro["Faixa de Valores"].forEach(opcao => {
+            const option = document.createElement("option");
+            option.value = opcao.split(" = ")[0];
+            option.textContent = opcao;
+            select.appendChild(option);
+        });
+
+        parametroDiv.appendChild(select);
+    } else {
+        const faixaValores = document.createElement("p");
+        faixaValores.textContent = `Faixa de Valores: ${parametro["Faixa de Valores"]}`;
+        parametroDiv.appendChild(faixaValores);
+    }
+
+    infoDiv.appendChild(parametroDiv);
+}
+
+document.getElementById("cima").addEventListener("click", function () {
+    currentIndex = (currentIndex - 1 + parametrosJson.length) % parametrosJson.length;
+    exibirParametro(currentIndex);
+});
+
+document.getElementById("baixo").addEventListener("click", function () {
+    currentIndex = (currentIndex + 1) % parametrosJson.length;
+    exibirParametro(currentIndex);
+});
+
+// Exibir o primeiro parâmetro ao carregar a página
+exibirParametro(currentIndex);
+
+
+
+
+  </script>
+
+
+</body>
+</html>
