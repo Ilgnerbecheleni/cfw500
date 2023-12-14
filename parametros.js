@@ -1151,8 +1151,7 @@ const parametrosJson = [
       "46 = Função 8 Aplicação"
     ]
   },
- null,
- {
+  {
   "Parâm.": "P0264",
   "Descrição": "Função da Entrada DI2",
    "Faixa de Valores": [
@@ -1589,7 +1588,6 @@ const parametrosJson = [
       "44 = Função 8 Aplicação"
     ]
   },
- null,
  {
   "Parâm.": "P0276",
   "Descrição": "Função da Saída DO2",
