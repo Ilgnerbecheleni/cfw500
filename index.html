@@ -3,185 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="./estilo.css" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <title>CFW 500</title>
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
-
-@font-face {
-   font-family: 'digital';
-   src: url('./7 Segment.ttf');
-}
-
-body{
-display:flex;
-justify-content:center;
-align-items:center;
-	  margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-	 overflow: hidden;
-}
-
-.inversor{
-position:relative;
-
-}
-
-.btn{
-background:none;
-border:0.5px solid #eee;
-border-radius:100%;
-cursor:pointer;
-position:absolute;
-}
-
-.reverse{
-left:20px;
-bottom:68px;
-}
-
-.cima{
-left:90px;
-bottom:120px;
-}
-
-.baixo{
-left:90px;
-bottom:75px;
-}
-
-#info{
-position:absolute;
-width:225px;
-height:135px;
-background:#4becc7;
-top:40px;
-left:29px;
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-#info h1{
-font-family: 'digital';
-font-size:62px;
-letter-spacing:3px;
-}
-.select-style {
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    display: inline-block;
-    overflow: hidden;
-}
-
-/* Estilo para a seta do combobox */
-.select-style select {
-    padding: 8px 12px;
-    width: 100%;
-    border: none;
-    box-shadow: none;
-    background-color: transparent;
-    appearance: none;
-}
-
-/* Estilo para as opções do combobox */
-.select-style select option {
-    padding: 10px;
-}
-.footer {
-    background-color: #2B2B9E;
-    text-align: center;
-    padding: 10px;
-    margin-top: auto; /* Isso faz com que o footer fique colado ao fundo da página */
-	width:100vw;
-	color:#fff;
-}
-	
-
 </style>
 </head>
 <body>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Guia de Referência CFW500</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Parâmetros</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/falhas.html">Erros</a>
+        </li>
+       
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  <main class='container d-flex justify-content-start flex-column  align-items-center mt-5'>
 <div class='inversor'>
-<img src="HMI.png" alt="Minha Figura">
-<div id="info">
-<h1>P00</h1>
-</div>
-<button class='btn reverse'><img src="reverse.png" alt="Minha Figura"></button>
-<button class='btn cima' id='cima'><img src="cima.png" alt="Minha Figura"></button>
-<button class='btn baixo' id='baixo'><img src="baixo.png" alt="Minha Figura"></button>
-</div>
-    <footer class="footer">
-        <p>Desenvolvido por Ilgner Aparecido Becheleni</p>
-    </footer>
-<script src='parametros.js'> </script>
+    <img src="HMI.png" alt="Minha Figura">
+    <div id="info">
+      <h1 id="parametro"></h1>
+      <p id="descricao">descrição</p>
+      <p id="faixa" class="faixa-array">faixa</p>
+      <select id="faixaSelect" class="faixa-array"></select>
+    </div>
+    <button class='btn reverse'><img src="reverse.png" alt="Minha Figura"></button>
+    <button class='btn cima' id='cima'><img src="cima.png" alt="Minha Figura"></button>
+    <button class='btn baixo' id='baixo'><img src="baixo.png" alt="Minha Figura"></button>
+  </div>
+
+
+</main>
+
+  <script src='parametros.js'></script>
+  <script src='script.js'></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   <script>
-	console.log(parametrosJson);
-
-
-
-	const cima = document.getElementById('cima');
-	const baixo = document.getElementById('baixo');
-
-
-	
-const infoDiv = document.getElementById("info");
-let currentIndex = 0;
-
-function exibirParametro(index) {
-    const parametro = parametrosJson[index];
-    infoDiv.innerHTML = "";
-
-    const parametroDiv = document.createElement("div");
-    parametroDiv.classList.add("parametro");
-
-    const titulo = document.createElement("h3");
-    titulo.textContent = `${parametro["Parâm."]} - ${parametro["Descrição"]}`;
-    parametroDiv.appendChild(titulo);
-
-   if (Array.isArray(parametro["Faixa de Valores"])) {
-    const select = document.createElement("select");
-    select.classList.add("select-style"); // Adicione a classe para o combobox
-
-    parametro["Faixa de Valores"].forEach(opcao => {
-        const option = document.createElement("option");
-        const opcaoSplit = opcao.split(" = ");
-        option.value = opcaoSplit[0];
-        option.textContent = opcao;
-        select.appendChild(option);
-    });
-
-    parametroDiv.appendChild(select);
-} else {
-        const faixaValores = document.createElement("p");
-        faixaValores.textContent = `Faixa de Valores: ${parametro["Faixa de Valores"]}`;
-        parametroDiv.appendChild(faixaValores);
-    }
-
-    infoDiv.appendChild(parametroDiv);
-}
-
-document.getElementById("cima").addEventListener("click", function () {
-    currentIndex = (currentIndex - 1 + parametrosJson.length) % parametrosJson.length;
-    exibirParametro(currentIndex);
-});
-
-document.getElementById("baixo").addEventListener("click", function () {
-    currentIndex = (currentIndex + 1) % parametrosJson.length;
-    exibirParametro(currentIndex);
-});
-
-// Exibir o primeiro parâmetro ao carregar a página
-exibirParametro(currentIndex);
-
-
-
-
+ 
   </script>
-
-
 </body>
 </html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Detalhes de Falhas</title>
+    <!-- Adicione os links para os estilos do Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Detalhes de Falhas</h2>
+    
+    <!-- Combobox para escolher a falha -->
+    <div class="form-group">
+        <label for="selectFalha">Selecione a Falha:</label>
+        <select class="form-control" id="selectFalha" onchange="mostrarDetalhes()">
+            <!-- As opções serão preenchidas dinamicamente com base no arquivo const falhas -->
+        </select>
+    </div>
+
+    <!-- Detalhes de Falha -->
+    <div class="mt-3">
+        <h4>Detalhes:</h4>
+        <p><strong>Descrição:</strong> <span id="descricao"></span></p>
+        <p><strong>Causas Prováveis:</strong> <span id="causas"></span></p>
+    </div>
+</div>
+
+<!-- Adicione os scripts do Bootstrap e jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="/falhas.js"></script>
+<!-- Adicione o script para preencher dinamicamente as opções do combobox e mostrar os detalhes -->
+<script>
+
+
+    const selectFalha = document.getElementById('selectFalha');
+    const descricao = document.getElementById('descricao');
+    const causas = document.getElementById('causas');
+
+    falhas.forEach(falha => {
+        const option = document.createElement('option');
+        option.value = falha.Falha;
+        option.text = falha.Falha;
+        selectFalha.add(option);
+    });
+
+    // Função para mostrar os detalhes ao escolher uma falha
+    function mostrarDetalhes() {
+        const falhaSelecionada = selectFalha.value;
+        const falha = falhas.find(item => item.Falha === falhaSelecionada);
+
+        if (falha) {
+            descricao.textContent = falha.Descrição;
+            causas.textContent = falha['Causas Prováveis'].join(', ');
+        } else {
+            descricao.textContent = '';
+            causas.textContent = '';
+        }
+    }
+</script>
+
+</body>
+</html>
