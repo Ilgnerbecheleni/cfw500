@@ -3,14 +3,10 @@
 
 @font-face {
    font-family: 'digital';
-   src: url('./7 Segment.ttf');
+   src: url('./fonts/7 Segment.ttf');
 }
 
-body{
-display:flex;
-justify-content:center;
-align-items:center;
-}
+
 
 .inversor{
 position:relative;
@@ -31,12 +27,12 @@ bottom:68px;
 }
 
 .cima{
-left:90px;
+left:86px;
 bottom:120px;
 }
 
 .baixo{
-left:90px;
+left:86px;
 bottom:75px;
 }
 
@@ -58,6 +54,10 @@ font-family: 'digital';
 font-size:62px;
 letter-spacing:3px;
 margin:0;
+}
+
+#descricao{
+font-size:0.8em;
 }
 
 #info p{

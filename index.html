@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./estilo.css" />
+    <link rel="stylesheet" href="./estilos/estilo.css" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -26,17 +26,17 @@
     <main
       class='container d-flex justify-content-start flex-column  align-items-center mt-5'>
       <div class='inversor'>
-        <img src="HMI.png" alt="Minha Figura">
+        <img src="./images/HMI.png" alt="Minha Figura">
         <div id="info">
           <h1 id="parametro"></h1>
           <p id="descricao">descrição</p>
           <p id="faixa" class="faixa-array">faixa</p>
           <select id="faixaSelect" class="faixa-array"></select>
         </div>
-        <button class='btn reverse'><img src="reverse.png" alt="Minha Figura"></button>
-        <button class='btn cima' id='cima'><img src="cima.png"
+        
+        <button class='btn cima' id='cima'><img src="./images/cima.png"
             alt="Minha Figura"></button>
-        <button class='btn baixo' id='baixo'><img src="baixo.png"
+        <button class='btn baixo' id='baixo'><img src="./images/baixo.png"
             alt="Minha Figura"></button>
       </div>
 
@@ -59,7 +59,7 @@
           <p><strong>Causas Prováveis:</strong> <span id="causas"></span></p>
         </div>
       </div>
-
+<a href="falhas.html">tela de falhas</a>
     </main>
 
     <script src='parametros.js'></script>
