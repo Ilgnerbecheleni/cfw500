@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iteração com a Estrutura</title>
+  <!-- Adiciona os estilos do Bootstrap (CSS) -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+<h1>Dados dos Cabos</h1>
+
+<!-- Formulário de Seleção -->
+<form id="cabosForm">
+  <div class="form-row">
+    <div class="form-group col-md-3">
+      <label for="quantidadeCabos">Quantidade de Cabos</label>
+      <select id="quantidadeCabos" class="form-control">
+        <!-- Preenchido dinamicamente pelo script -->
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="grupo">Grupo</label>
+      <select id="grupo" class="form-control">
+        <!-- Preenchido dinamicamente pelo script -->
+      </select>
+    </div>
+    <div class="form-group col-md-3">
+      <label for="secao">Seção</label>
+      <select id="secao" class="form-control">
+        <!-- Preenchido dinamicamente pelo script -->
+      </select>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" onclick="calcularCorrente()">Calcular Corrente</button>
+</form>
+
+<!-- Resultado -->
+<div id="resultadoContainer" class="mt-3"></div>
+
+<!-- Adiciona os scripts do Bootstrap (JS) e jQuery -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="cabos.js"></script>
+<script>
+
+  // Preenche as opções dos selects
+  function preencherOpcoes() {
+    const quantidadeCabosSelect = document.getElementById('quantidadeCabos');
+    const grupoSelect = document.getElementById('secao');
+    const secaoSelect = document.getElementById('grupo');
+
+    // Preenche quantidade de cabos
+    for (let i = 0; i < cabos.length; i++) {
+      const option = document.createElement('option');
+      option.value = Object.keys(cabos[i])[0];
+      option.text = Object.keys(cabos[i])[0];
+      quantidadeCabosSelect.appendChild(option);
+    }
+
+    // Preenche grupos (com base no primeiro conjunto de dados)
+    const grupos = Object.keys(Object.values(cabos[0])[0]);
+    grupos.forEach(grupo => {
+      const option = document.createElement('option');
+      option.value = grupo;
+      option.text = grupo;
+      grupoSelect.appendChild(option);
+    });
+
+    // Preenche seções (com base no primeiro conjunto de dados)
+    const secoes = Object.keys(Object.values(Object.values(cabos[0])[0])[0]);
+    secoes.forEach(secao => {
+      const option = document.createElement('option');
+      option.value = secao;
+      option.text = secao;
+      secaoSelect.appendChild(option);
+    });
+  }
+
+  // Inicializa as opções
+  preencherOpcoes();
+
+  // Função para calcular a corrente
+  function calcularCorrente() {
+    const quantidadeCabosSelect = document.getElementById('quantidadeCabos');
+    const grupoSelect = document.getElementById('grupo');
+    const secaoSelect = document.getElementById('secao');
+    const resultadoContainer = document.getElementById('resultadoContainer');
+
+    const quantidadeCabos = quantidadeCabosSelect.value;
+    const grupo = grupoSelect.value;
+    const secao = secaoSelect.value;
+
+    const corrente = cabos.find(item => Object.keys(item)[0] === quantidadeCabos)[quantidadeCabos][secao][grupo];
+
+    resultadoContainer.innerHTML = `<p>A corrente para ${quantidadeCabos} cabo(s) no grupo ${grupo} e seção ${secao} é: ${corrente} A</p>`;
+  }
+</script>
+
+</body>
+</html>
