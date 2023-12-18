@@ -32,35 +32,44 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="/falhas.js"></script>
+<script src="falhas.js"></script>
 <!-- Adicione o script para preencher dinamicamente as opções do combobox e mostrar os detalhes -->
 <script>
 
+const selectFalha = document.getElementById('selectFalha');
+const descricao = document.getElementById('descfalha');
+const causas = document.getElementById('causas');
 
-    const selectFalha = document.getElementById('selectFalha');
-    const descricao = document.getElementById('descricao');
-    const causas = document.getElementById('causas');
+// Iterando sobre o array de falhas
+falhas.forEach(falha => {
+const option = document.createElement('option');
+option.value = falha.Falha;
+option.text = falha.Falha;
+selectFalha.add(option);
+});
 
-    falhas.forEach(falha => {
-        const option = document.createElement('option');
-        option.value = falha.Falha;
-        option.text = falha.Falha;
-        selectFalha.add(option);
-    });
+// Função para mostrar os detalhes ao escolher uma falha
+function mostrarDetalhes() {
+const falhaSelecionada = selectFalha.value;
+const falha = falhas.find(item => item.Falha === falhaSelecionada);
+descricao.innerHTML = falha['Descricao'];
+if (falha) {
+    // Corrigindo o acesso ao campo "Descrição"
+    descricao.innerHTML = falha['Descricao'];
+    console.log(falha['Descricao']);
 
-    // Função para mostrar os detalhes ao escolher uma falha
-    function mostrarDetalhes() {
-        const falhaSelecionada = selectFalha.value;
-        const falha = falhas.find(item => item.Falha === falhaSelecionada);
-
-        if (falha) {
-            descricao.textContent = falha.Descrição;
-            causas.textContent = falha['Causas Prováveis'].join(', ');
-        } else {
-            descricao.textContent = '';
-            causas.textContent = '';
-        }
+    // Verificando se "Causas Prováveis" é uma string ou um array
+    if (Array.isArray(falha['Causas Prováveis'])) {
+        causas.textContent = falha['Causas Prováveis'].join(', ');
+    } else {
+        causas.textContent = falha['Causas Prováveis'];
     }
+} else {
+    descricao.textContent = '';
+    causas.textContent = '';
+}
+}
+
 </script>
 
 </body>
