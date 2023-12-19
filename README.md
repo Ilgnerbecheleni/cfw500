@@ -6,5 +6,6 @@
 
 1. Parametros do inversor
 2. Tela com lista de falhas
+3. 3. Dimensionamento de cabos conforme norma
 
 
