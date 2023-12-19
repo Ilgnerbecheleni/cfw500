@@ -10,7 +10,7 @@
 <body class="container mt-5">
 
 <h1>Dados dos Cabos</h1>
-
+<img src="./images/agrupamento.png" alt="tabela de dimensionamento" class="img-fluid mt-4 mb-3">
 <!-- Formulário de Seleção -->
 <form id="cabosForm">
   <div class="form-row">
@@ -33,17 +33,18 @@
       </select>
     </div>
   </div>
+  <div id="resultadoContainer" class="mt-3"></div>
   <button type="button" class="btn btn-primary" onclick="calcularCorrente()">Calcular Corrente</button>
 </form>
 
 <!-- Resultado -->
-<div id="resultadoContainer" class="mt-3"></div>
+
 
 <!-- Adiciona os scripts do Bootstrap (JS) e jQuery -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="cabos.js"></script>
+<script src="./scripts/cabos.js"></script>
 <script>
 
   // Preenche as opções dos selects
